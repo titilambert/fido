@@ -160,6 +160,13 @@ class FidoConnection(object):
                               for field in ['used', 'total', 'remaining']
                               if self.metrics['data_' + field] >= 0])
             lines.append(line)
+            # Add talk
+            line = "talk,unit=minutes "
+            line += ",".join(["{}={}".format(field, self.metrics['talk_' + field])
+                              for field in ['used', 'total', 'remaining']
+                              if self.metrics['talk_' + field] >= 0])
+            lines.append(line)
+
             # Add messages
             for msg_type in ['mms', 'sms', 'smsint']:
                 line = "messages,type={} ".format(msg_type)
